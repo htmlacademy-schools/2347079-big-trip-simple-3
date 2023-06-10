@@ -1,13 +1,15 @@
-import { generatePoints, getDefaultPoint } from '../mock/point';
+import { generatePoints } from '../mock/point';
 
 const POINT_COUNT = 3;
 
 export default class PointsModel {
+  #points = [];
+
   constructor() {
-    this.points = [];
-    this.points.push(getDefaultPoint());
-    this.points.push(...generatePoints(POINT_COUNT));
+    this.#points.push(...generatePoints(POINT_COUNT));
   }
 
-  getPoints = () => this.points;
+  get points() {
+    return this.#points;
+  }
 }

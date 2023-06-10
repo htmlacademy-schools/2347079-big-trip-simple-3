@@ -29,7 +29,7 @@ const createPointListSortTemplate = () =>
   </form>`;
 
 export default class PointListSortView extends AbstractView {
-  getTemplate() {
+  get template() {
     return createPointListSortTemplate();
   }
 }

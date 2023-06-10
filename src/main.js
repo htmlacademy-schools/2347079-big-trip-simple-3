@@ -5,7 +5,7 @@ import PointsModel from './model/point-model.js';
 
 const filterFormContainer = document.querySelector('.trip-controls__filters');
 const tripEventsContainer = document.querySelector('.trip-events');
-const pointsModel = new PointsModel();
-const tripPointsPresenter = new TripPointsPresenter();
 render(new FilterFormView(), filterFormContainer);
-tripPointsPresenter.init(tripEventsContainer, pointsModel);
+const pointsModel = new PointsModel();
+const tripPointsPresenter = new TripPointsPresenter(tripEventsContainer, pointsModel);
+tripPointsPresenter.init();
