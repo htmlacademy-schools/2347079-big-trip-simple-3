@@ -10,6 +10,8 @@ const createPointListItemTemplate = () =>
   </li>`;
 
 export default class PointListView extends AbstractView {
+  #isEmpty = true;
+
   get template() {
     return createPointListTemplate();
   }
@@ -18,6 +20,7 @@ export default class PointListView extends AbstractView {
     const li = createElement(createPointListItemTemplate());
     render(component, li);
     this.element.append(li);
+    this.#isEmpty = false;
   }
 
   replaceComponent(component1, component2) {

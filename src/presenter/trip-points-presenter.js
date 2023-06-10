@@ -3,6 +3,7 @@ import PointListView from '../view/point-list-view.js';
 import PointListSortView from '../view/point-list-sort-view.js';
 import PointItemView from '../view/point-item-view.js';
 import PointListFormView from '../view/point-list-form-view.js';
+import EmptyPointListView from '../view/point-list-empty-view.js';
 
 export default class TripPointsPresenter {
   #pointListComponent = new PointListView();
@@ -50,8 +51,12 @@ export default class TripPointsPresenter {
   init() {
     render(new PointListSortView(), this.#container);
     render(this.#pointListComponent, this.#container);
-    for (const point of this.#pointList) {
-      this.#renderListItemComponent(point);
+    if (this.#pointList.length === 0) {
+      render(new EmptyPointListView(), this.#container);
+    } else {
+      for (const point of this.#pointList) {
+        this.#renderListItemComponent(point);
+      }
     }
   }
 }
