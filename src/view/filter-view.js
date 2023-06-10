@@ -16,7 +16,7 @@ const createFilterFormTemplate = () =>
   </form>`;
 
 export default class FilterFormView extends AbstractView {
-  getTemplate() {
+  get template() {
     return createFilterFormTemplate();
   }
 }

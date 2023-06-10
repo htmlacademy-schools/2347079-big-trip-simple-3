@@ -54,12 +54,14 @@ const createPointTemplate = (point) => {
 };
 
 export default class PointItemView extends AbstractView {
+  #element = null;
+
   constructor(point = getDefaultPoint()) {
     super();
-    this.point = point;
+    this.#element = point;
   }
 
-  getTemplate() {
-    return createPointTemplate(this.point);
+  get template() {
+    return createPointTemplate(this.#element);
   }
 }
