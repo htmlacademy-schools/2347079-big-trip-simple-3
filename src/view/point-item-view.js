@@ -1,5 +1,5 @@
-import { getFormattedDate } from '../util.js';
-import AbstractView from './abstract-view.js';
+import AbstractView from '../framework/view/abstract-view.js';
+import { getFormattedDate } from '../utils/util.js';
 import { destinationsStorage, offersStorage, getDefaultPoint } from '../mock/point.js';
 
 const createPointTemplate = (point) => {
@@ -64,4 +64,14 @@ export default class PointItemView extends AbstractView {
   get template() {
     return createPointTemplate(this.#element);
   }
+
+  setEditButtonClickHandler = (callback) => {
+    this._callback.click = callback;
+    this.element.querySelector('.event__rollup-btn').addEventListener('click', this.#clickHandler);
+  };
+
+  #clickHandler = (evt) => {
+    evt.preventDefault();
+    this._callback.click();
+  };
 }

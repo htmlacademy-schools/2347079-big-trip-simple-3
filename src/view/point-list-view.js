@@ -1,5 +1,5 @@
-import {createElement, render} from '../render.js';
-import AbstractView from './abstract-view.js';
+import {createElement, render} from '../framework/render.js';
+import AbstractView from '../framework/view/abstract-view.js';
 
 const createPointListTemplate = () =>
   `<ul class="trip-events__list">
@@ -10,8 +10,6 @@ const createPointListItemTemplate = () =>
   </li>`;
 
 export default class PointListView extends AbstractView {
-  #isEmpty = true;
-
   get template() {
     return createPointListTemplate();
   }
@@ -20,10 +18,5 @@ export default class PointListView extends AbstractView {
     const li = createElement(createPointListItemTemplate());
     render(component, li);
     this.element.append(li);
-    this.#isEmpty = false;
-  }
-
-  replaceComponent(component1, component2) {
-    this.element.replaceChild(component1.element, component2.element);
   }
 }
