@@ -1,6 +1,6 @@
 import AbstractView from './abstract-view.js';
 
-const createEventListSortTemplate = () =>
+const createPointListSortTemplate = () =>
   `<form class="trip-events__trip-sort  trip-sort" action="#" method="get">
     <div class="trip-sort__item  trip-sort__item--day">
       <input id="sort-day" class="trip-sort__input  visually-hidden" type="radio" name="trip-sort" value="sort-day">
@@ -28,8 +28,8 @@ const createEventListSortTemplate = () =>
     </div>
   </form>`;
 
-export default class EventListSortView extends AbstractView {
+export default class PointListSortView extends AbstractView {
   getTemplate() {
-    return createEventListSortTemplate();
+    return createPointListSortTemplate();
   }
 }
