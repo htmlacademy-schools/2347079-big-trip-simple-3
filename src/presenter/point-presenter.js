@@ -1,6 +1,6 @@
 import {render, replace, remove} from '../framework/render.js';
 import PointItemView from '../view/point-item-view';
-import PointListFormView from '../view/point-list-form-view';
+import PointEditView from '../view/point-edit-view';
 
 const Mode = {
   DEFAULT: 'DEFAULT',
@@ -31,7 +31,7 @@ export default class PointPresenter {
     const prevPointEditComponent = this.#pointEditComponent;
 
     this.#pointComponent = new PointItemView(point);
-    this.#pointEditComponent = new PointListFormView(point);
+    this.#pointEditComponent = new PointEditView(point);
 
     this.#pointComponent.setEditButtonClickHandler(this.#handleEditClick);
     this.#pointEditComponent.setFormSubmitHandler(this.#handleFormSubmit);
@@ -64,6 +64,7 @@ export default class PointPresenter {
 
   resetView = () => {
     if (this.#mode !== Mode.DEFAULT) {
+      this.#pointEditComponent.reset(this.#point);
       this.#replaceFormToPoint();
     }
   };
@@ -89,6 +90,7 @@ export default class PointPresenter {
   #escKeyDownHandler = (evt) => {
     if (evt.key === 'Escape' || evt.key === 'Esc') {
       evt.preventDefault();
+      this.#pointEditComponent.reset(this.#point);
       this.#replaceFormToPoint();
     }
   };

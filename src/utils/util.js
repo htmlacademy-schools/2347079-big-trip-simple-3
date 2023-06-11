@@ -28,3 +28,5 @@ export const updateItem = (items, update) => {
     ...items.slice(index + 1),
   ];
 };
+
+export const getIdFromTag = (tag) => +tag.id.split('-').slice(-1);
