@@ -1,4 +1,4 @@
-import {render} from '../render.js';
+import { render } from '../framework/render.js';
 import PointListView from '../view/point-list-view.js';
 import PointListSortView from '../view/point-list-sort-view.js';
 import PointItemView from '../view/point-item-view.js';
@@ -15,28 +15,35 @@ export default class TripPointsPresenter {
     const pointComponent = new PointItemView(point);
     const formComponent = new PointListFormView(point);
 
-    const closeEditFormOnEcsapeKey = (event) => {
+    const replacePointToForm = () => {
+      this.#pointListComponent.element.replaceChild(formComponent.element, pointComponent.element);
+    };
+
+    const replaceFormToPoint = () => {
+      this.#pointListComponent.element.replaceChild(pointComponent.element, formComponent.element);
+    };
+
+    const onEscKeyDown = (event) => {
       if (event.key === 'Escape') {
         event.preventDefault();
-        this.#pointListComponent.element.replaceChild(pointComponent.element, formComponent.element);
-        document.body.removeEventListener('keydown', closeEditFormOnEcsapeKey);
+        replaceFormToPoint();
+        document.body.removeEventListener('keydown', onEscKeyDown);
       }
     };
 
-    pointComponent.element.querySelector('.event__rollup-btn').addEventListener('click', () => {
-      this.#pointListComponent.element.replaceChild(formComponent.element, pointComponent.element);
-      document.body.addEventListener('keydown', closeEditFormOnEcsapeKey);
+    pointComponent.setEditButtonClickHandler(() => {
+      replacePointToForm();
+      document.body.addEventListener('keydown', onEscKeyDown);
     });
 
-    formComponent.element.querySelector('.event__save-btn').addEventListener('click', (evt) => {
-      evt.preventDefault();
-      this.#pointListComponent.element.replaceChild(pointComponent.element, formComponent.element);
-      document.body.removeEventListener('keydown', closeEditFormOnEcsapeKey);
+    formComponent.setFormSubmitHandler(() => {
+      replaceFormToPoint();
+      document.body.removeEventListener('keydown', onEscKeyDown);
     });
 
-    formComponent.element.querySelector('.event__reset-btn').addEventListener('click', () => {
-      this.#pointListComponent.element.replaceChild(pointComponent.element, formComponent.element);
-      document.body.removeEventListener('keydown', closeEditFormOnEcsapeKey);
+    formComponent.setFormResetHandler(() => {
+      replaceFormToPoint();
+      document.body.removeEventListener('keydown', onEscKeyDown);
     });
 
     render(pointComponent, this.#pointListComponent.element);

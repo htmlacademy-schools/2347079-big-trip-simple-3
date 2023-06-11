@@ -1,4 +1,4 @@
-import { getRandomInt, getMockText } from '../util.js';
+import { getRandomInt, getMockText } from '../utils/util.js';
 import { POINT_TYPES } from '../const.js';
 import dayjs from 'dayjs';
 
