@@ -79,7 +79,7 @@ export const generatePoints = (numOfPoints) => {
 export const getDefaultPoint = () => (Object.assign({}, {
   'id': 0,
   'type': POINT_TYPES[0],
-  'base_price': null,
+  'base_price': 0,
   'date_from': '1970-01-01',
   'date_to': '1970-01-02',
   'destination': 0,

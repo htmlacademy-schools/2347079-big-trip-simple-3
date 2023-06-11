@@ -22,6 +22,11 @@ const createSortTemplate = (currentActiveSort) => `
 export default class SortView extends AbstractView {
   #currentActiveSort = SortType.DAY;
 
+  constructor (currentActiveSort) {
+    super();
+    this.#currentActiveSort = currentActiveSort;
+  }
+
   get template() {
     return createSortTemplate(this.#currentActiveSort);
   }

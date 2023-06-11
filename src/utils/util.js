@@ -6,7 +6,14 @@ export const getFormattedDate = (eventDate, format = MODEL_DATE_FORMAT) => dayjs
 export const turnModelDateToFramework = (date) => dayjs(date).format('DD/MM/YY HH:mm');
 export const isEventUpcoming = (date) => !dayjs(date).isBefore(dayjs(), 'day');
 export const compareDates = (a, b) => dayjs(a).diff(dayjs(b)) < 0;
-
+export const validateNumber = (num) => {
+  if (isNaN(num)) {
+    return 0;
+  } else if (num >= 0) {
+    return num;
+  }
+  return -num;
+};
 export const getMockText = (len) => {
   const mockText = `
   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -17,20 +24,6 @@ export const getMockText = (len) => {
   cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
   est laborum.`;
   return mockText.slice(0, len);
-};
-
-export const updateItem = (items, update) => {
-  const index = items.findIndex((item) => item.id === update.id);
-
-  if (index === -1) {
-    return items;
-  }
-
-  return [
-    ...items.slice(0, index),
-    update,
-    ...items.slice(index + 1),
-  ];
 };
 
 export const getIdFromTag = (tag) => +tag.id.split('-').slice(-1);
