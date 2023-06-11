@@ -1,8 +1,12 @@
 import dayjs from 'dayjs';
+import { MODEL_DATE_FORMAT } from '../const';
 
 export const getRandomInt = (upperBound = 100) => (Math.floor(Math.random() * upperBound));
-export const getFormattedDate = (eventDate, format) => dayjs(eventDate).format(format);
-export const isEventUpcoming = (date) => !dayjs(date).isBefore(dayjs(), 'D');
+export const getFormattedDate = (eventDate, format = MODEL_DATE_FORMAT) => dayjs(eventDate).format(format);
+export const turnModelDateToFramework = (date) => dayjs(date).format('DD/MM/YY HH:mm');
+export const isEventUpcoming = (date) => !dayjs(date).isBefore(dayjs(), 'day');
+export const compareDates = (a, b) => dayjs(a).diff(dayjs(b)) < 0;
+
 export const getMockText = (len) => {
   const mockText = `
   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
