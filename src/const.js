@@ -1,4 +1,7 @@
+import {getFormattedDate} from './utils/util.js';
+
 const POINT_TYPES = ['taxi', 'bus', 'train', 'ship', 'drive', 'flight', 'check-in', 'sightseeing', 'restaurant'];
+
 const MODEL_DATE_FORMAT = 'YYYY-MM-DDTHH:mm';
 
 const FilterType = {
@@ -27,4 +30,13 @@ const UpdateType = {
   INIT: 'INIT',
 };
 
-export {POINT_TYPES, MODEL_DATE_FORMAT, FilterType, SortType, UserAction, UpdateType};
+const defaultPoint = () => Object.assign({}, {
+  'id': 0,
+  'type': 'taxi',
+  'base_price': 0,
+  'date_from': getFormattedDate(),
+  'date_to': getFormattedDate(),
+  'destination': 1,
+  'offers': [],
+});
+export {POINT_TYPES, MODEL_DATE_FORMAT, FilterType, SortType, UserAction, UpdateType, defaultPoint};

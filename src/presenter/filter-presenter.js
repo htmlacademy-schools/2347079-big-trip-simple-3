@@ -4,10 +4,10 @@ import {FilterType, UpdateType} from '../const.js';
 
 export default class FilterPresenter {
   #filterContainer = null;
+  #filterComponent = null;
+
   #filterModel = null;
   #pointsModel = null;
-
-  #filterComponent = null;
 
   constructor(filterContainer, filterModel, pointsModel) {
     this.#filterContainer = filterContainer;

@@ -10,6 +10,4 @@ export const sort = {
 };
 
 export const sortPointsByDay = (pa, pb) => dayjs(pa.date_from).toDate() - dayjs(pb.date_from).toDate();
-
 export const sortPointsByPrice = (pa, pb) => pb.base_price - pa.base_price;
-
