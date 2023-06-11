@@ -4,12 +4,14 @@ import {render} from './framework/render.js';
 import PointsModel from './model/point-model.js';
 import { generateFilter } from './mock/filter.js';
 
-const pointsModel = new PointsModel();
-const filterFormContainer = document.querySelector('.trip-controls__filters');
 const tripEventsContainer = document.querySelector('.trip-events');
-const filters = generateFilter(pointsModel.points);
+const filterFormContainer = document.querySelector('.trip-controls__filters');
 
-render(new FilterFormView(filters), filterFormContainer);
+const pointsModel = new PointsModel();
 const tripPointsPresenter = new TripPointsPresenter(tripEventsContainer, pointsModel);
 
+const filters = generateFilter(pointsModel.points);
+
+// render new point button
+render(new FilterFormView(filters), filterFormContainer);
 tripPointsPresenter.init();

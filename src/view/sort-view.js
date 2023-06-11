@@ -20,6 +20,14 @@ export default class SortView extends AbstractView {
     this.#sorts = sorts;
   }
 
+  get sorts() {
+    return this.#sorts;
+  }
+
+  set sorts(nsorts) {
+    this.#sorts = nsorts;
+  }
+
   get template() {
     return createSortTemplate(this.#sorts);
   }

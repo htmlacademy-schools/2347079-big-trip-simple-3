@@ -2,10 +2,11 @@ import AbstractView from '../framework/view/abstract-view.js';
 import { POINT_TYPES } from '../const.js';
 import { destinationsStorage, offersStorage } from '../mock/point.js';
 
+const pointPriceMarkup = (point) => point.base_price ? point.base_price : '';
+
 const createPointListFormTemplate = (point) => {
   const pointDestination = destinationsStorage[point.destination];
   const pointTypeIconMarkup = `img/icons/${point.type}.png`;
-  const pointPriceMarkup = point.base_price ? point.base_price : '';
   const getPointTypesMarkup = () => POINT_TYPES.map((pointType) => `
     <div class="event__type-item">
       <input id="event-type-taxi-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="${pointType}">
@@ -86,7 +87,7 @@ const createPointListFormTemplate = (point) => {
         <span class="visually-hidden">Price</span>
         &euro;
       </label>
-      <input class="event__input  event__input--price" id="event-price-1" type="text" name="event-price" value="${pointPriceMarkup}">
+      <input class="event__input  event__input--price" id="event-price-1" type="text" name="event-price" value="${pointPriceMarkup(point)}">
     </div>
 
     <button class="event__save-btn  btn  btn--blue" type="submit">Save</button>
@@ -118,30 +119,32 @@ const createPointListFormTemplate = (point) => {
 };
 
 export default class PointListFormView extends AbstractView {
-  #element = null;
+  #point = null;
 
   constructor(point) {
     super();
-    this.#element = point;
+    this.#point = point;
   }
 
   get template() {
-    return createPointListFormTemplate(this.#element);
+    return createPointListFormTemplate(this.#point);
   }
 
   setFormSubmitHandler = (callback) => {
     this._callback.formSubmit = callback;
     this.element.querySelector('.event__save-btn').addEventListener('click', this.#formSubmitHandler);
+    // this.element.addEventListener('submit', this.#formSubmitHandler);
   };
 
   #formSubmitHandler = (evt) => {
     evt.preventDefault();
-    this._callback.formSubmit();
+    this._callback.formSubmit(this.#point);
   };
 
   setFormResetHandler = (callback) => {
     this._callback.formReset = callback;
     this.element.querySelector('.event__reset-btn').addEventListener('click', this.#formResetHandler);
+    this.element.querySelector('.event__rollup-btn').addEventListener('click', this.#formResetHandler);
   };
 
   #formResetHandler = (evt) => {
