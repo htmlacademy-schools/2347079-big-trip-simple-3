@@ -1,5 +1,5 @@
-import {createElement, render} from '../framework/render.js';
 import AbstractView from '../framework/view/abstract-view.js';
+import {createElement, render} from '../framework/render.js';
 
 const createPointListTemplate = () =>
   `<ul class="trip-events__list">
