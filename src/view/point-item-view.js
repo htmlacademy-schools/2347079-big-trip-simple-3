@@ -35,9 +35,9 @@ const createPointTemplate = (point) => {
     <h3 class="event__title">${point.type} ${destinationsStorage[point.destination].name}</h3>
     <div class="event__schedule">
       <p class="event__time">
-        <time class="event__start-time" datetime="${getFormattedDate(point.date_from, 'YYYY-MM-DDTHH:mm')}">${getFormattedDate(point.date_from, 'HH:mm')}</time>
+        <time class="event__start-time" datetime="${getFormattedDate(point.date_from)}">${getFormattedDate(point.date_from, 'HH:mm')}</time>
         &mdash;
-        <time class="event__end-time" datetime="${getFormattedDate(point.date_to, 'YYYY-MM-DDTHH:mm')}">${getFormattedDate(point.date_to, 'HH:mm')}</time>
+        <time class="event__end-time" datetime="${getFormattedDate(point.date_to)}">${getFormattedDate(point.date_to, 'HH:mm')}</time>
       </p>
     </div>
     <p class="event__price">
