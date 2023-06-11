@@ -27,3 +27,10 @@ export const getMockText = (len) => {
 };
 
 export const getIdFromTag = (tag) => +tag.id.split('-').slice(-1);
+export const getAvailableOffers = (type, offers) => {
+  for (const category of offers) {
+    if (category.type === type) {
+      return category.offers;
+    }
+  }
+};

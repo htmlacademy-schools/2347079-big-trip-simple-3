@@ -24,6 +24,7 @@ const UpdateType = {
   PATCH: 'PATCH',
   MINOR: 'MINOR',
   MAJOR: 'MAJOR',
+  INIT: 'INIT',
 };
 
 export {POINT_TYPES, MODEL_DATE_FORMAT, FilterType, SortType, UserAction, UpdateType};

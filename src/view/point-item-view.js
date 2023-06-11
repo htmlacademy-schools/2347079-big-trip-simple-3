@@ -1,8 +1,8 @@
 import AbstractView from '../framework/view/abstract-view.js';
 import { getFormattedDate, validateNumber } from '../utils/util.js';
-import { destinationsStorage, offersStorage, getDefaultPoint } from '../mock/point.js';
+import PointsModel from '../model/point-model.js';
 
-const createPointTemplate = (point) => {
+const createPointTemplate = (point, availableOffers, availableDestinations) => {
   const pointIcon = `img/icons/${point.type}.png`;
   const getOffersMarkup = () => {
     if (point.offers.length === 0) {
@@ -13,8 +13,7 @@ const createPointTemplate = (point) => {
       `;
     } else {
       const markup = [];
-      for (const id of point.offers) {
-        const offer = offersStorage[id];
+      for (const offer of availableOffers) {
         markup.push(`
           <li class="event__offer">
             <span class="event__offer-title">${offer.title}</span>
@@ -32,7 +31,7 @@ const createPointTemplate = (point) => {
     <div class="event__type">
       <img class="event__type-icon" width="42" height="42" src="${pointIcon}" alt="Event type icon">
     </div>
-    <h3 class="event__title">${point.type} ${destinationsStorage[point.destination].name}</h3>
+    <h3 class="event__title">${point.type} ${availableDestinations[point.destination - 1].name}</h3>
     <div class="event__schedule">
       <p class="event__time">
         <time class="event__start-time" datetime="${getFormattedDate(point.date_from)}">${getFormattedDate(point.date_from, 'HH:mm')}</time>
@@ -55,14 +54,18 @@ const createPointTemplate = (point) => {
 
 export default class PointItemView extends AbstractView {
   #element = null;
+  #availableOffers = [];
+  #availableDestinations = [];
 
-  constructor(point = getDefaultPoint()) {
+  constructor(point = PointsModel.defaultPoint(), availableOffers = [], availableDestinations = []) {
     super();
     this.#element = point;
+    this.#availableOffers = availableOffers;
+    this.#availableDestinations = availableDestinations;
   }
 
   get template() {
-    return createPointTemplate(this.#element);
+    return createPointTemplate(this.#element, this.#availableOffers, this.#availableDestinations);
   }
 
   setEditButtonClickHandler = (callback) => {
