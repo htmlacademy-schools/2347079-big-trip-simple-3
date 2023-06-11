@@ -35,17 +35,17 @@ export default class ListPresenter {
 
   constructor(container, filterModel, pointsModel) {
     this.#container = container;
-    this.#pointsModel = pointsModel;
     this.#filterModel = filterModel;
+    this.#pointsModel = pointsModel;
     this.#newPointPresenter = new NewPointPresenter(this.#pointListComponent, this.#handleViewAction);
     this.#pointsModel.addObserver(this.#handleModelEvent);
     this.#filterModel.addObserver(this.#handleModelEvent);
   }
 
   get points() {
-    this.#filterType = this.#filterModel.filter;
+    const filterType = this.#filterModel.filter;
     const points = this.#pointsModel.points;
-    const filteredPoints = filter[this.#filterType](points);
+    const filteredPoints = filter[filterType](points);
 
     switch (this.#currentSortType) {
       case SortType.DAY:
@@ -53,6 +53,7 @@ export default class ListPresenter {
       case SortType.PRICE:
         return filteredPoints.sort(sortPointsByPrice);
     }
+
     return filteredPoints;
   }
 
