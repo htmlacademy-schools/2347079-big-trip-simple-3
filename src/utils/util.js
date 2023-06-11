@@ -2,6 +2,7 @@ import dayjs from 'dayjs';
 
 export const getRandomInt = (upperBound = 100) => (Math.floor(Math.random() * upperBound));
 export const getFormattedDate = (eventDate, format) => dayjs(eventDate).format(format);
+export const isEventUpcoming = (date) => !dayjs(date).isBefore(dayjs(), 'D');
 export const getMockText = (len) => {
   const mockText = `
   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
