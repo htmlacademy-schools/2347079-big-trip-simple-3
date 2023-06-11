@@ -47,7 +47,7 @@ const generateOffers = () => {
 const generateType = () => POINT_TYPES[getRandomInt(POINT_TYPES.length)];
 
 const generateDate = () => {
-  const dateFrom = dayjs().add(getRandomInt(60), 'minute');
+  const dateFrom = dayjs().add(getRandomInt(600000), 'minute');
   const dateTo = dateFrom.add(getRandomInt(1000), 'minute');
   return {
     'date_from': dateFrom,
