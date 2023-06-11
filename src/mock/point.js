@@ -14,7 +14,7 @@ const generatePictures = () => {
 };
 
 const mockDestinationNamesList = ['Amsterdam', 'Geneva', 'Chamonix'];
-const destinationsStorage = {};
+const destinationsStorage = [];
 for (let i = 0; i < mockDestinationNamesList.length; i++) {
   destinationsStorage[i] = {
     'id': i,
